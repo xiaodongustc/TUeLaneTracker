@@ -53,9 +53,9 @@
 #define CAMERA_ANGLE_Y          0
 #define CAMERA_ANGLE_Z          0
 
-// Y is perpendicular to the road           (up)
-// Z is perpendicular to Y and on the road  (in the driving direction)
-// X is perpendicular to Y and Z            (towards the side of the road)
+// Y is perpendicular to the road           (vertical       /up)
+// Z is perpendicular to Y and on the road  (longitudinal   /driving direction)
+// X is perpendicular to Y and Z            (lateral        /sideways)
 
 
 

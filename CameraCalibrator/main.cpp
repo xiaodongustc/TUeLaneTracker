@@ -56,7 +56,7 @@ int main( int argc, char** argv )
 
     // 3x1 Translation Matrix
     float TRANSL_X = CAMERA_OFFSET_X;
-    float TRANSL_Y = 0;
+    float TRANSL_Y = atan((90-CAMERA_FOV_V/2)*M_PI/180) * CAMERA_HEIGHT; //Distance of camera to first visible patch of road.
     float TRANSL_Z = CAMERA_HEIGHT;
     Mat TranslationMatrix = (Mat_<float>(3,1)<< TRANSL_X,
                 TRANSL_Y,
@@ -66,9 +66,6 @@ int main( int argc, char** argv )
 
     // 4x4  Extrinsic Parameters
     // For extrinsic, concatenate [Rotation (3x3) , Translation(3x1); 0(1x3), 1(1x1)]
-    /*Mat CameraMatrixExtrinsic = (Mat_<float>(4,4)<< RotationCombined, TranslationMatrix,
-                EmptyRow, 1);
-   	*/
       Mat CameraMatrixExtrinsic;
       hconcat(RotationCombined,TranslationMatrix,CameraMatrixExtrinsic);
       vconcat(CameraMatrixExtrinsic,BottomRowExentric,CameraMatrixExtrinsic);
