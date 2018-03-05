@@ -22,8 +22,8 @@ int main( int argc, char** argv )
     // 3x4 Intrinsic Parameters
 
     //Calculating the values based on camera parameters
-    float X_DIM = CAMERA_RES_V / 2; //[Pixels]
-    float Y_DIM = CAMERA_RES_H / 2; //[Pixels]
+    float X_DIM = CAMERA_RES_H / 2; //[Pixels]
+    float Y_DIM = CAMERA_RES_V / 2; //[Pixels]
     float AXIS_SKEW = 0;
     // Assuming the given focal length is correct:
     float FOCAL_X = CAMERA_FOCAL_LENGTH;
@@ -55,20 +55,23 @@ int main( int argc, char** argv )
     Mat RotationCombined = RotationX * RotationY * RotationZ;
 
     // 3x1 Translation Matrix
-    float TRANSL_X = CAMERA_OFFSET;
+    float TRANSL_X = CAMERA_OFFSET_X;
     float TRANSL_Y = 0;
     float TRANSL_Z = CAMERA_HEIGHT;
     Mat TranslationMatrix = (Mat_<float>(3,1)<< TRANSL_X,
                 TRANSL_Y,
                 TRANSL_Z);
 
-    Mat EmptyRow = (Mat_<float>(1,3) << 0, 0, 0);
+    Mat BottomRowExentric = (Mat_<float>(1,4) << 0, 0, 0, 1);
 
     // 4x4  Extrinsic Parameters
     // For extrinsic, concatenate [Rotation (3x3) , Translation(3x1); 0(1x3), 1(1x1)]
-    Mat CameraMatrixExtrinsic = (Mat_<float>(4,4)<< RotationCombined, TranslationMatrix,
+    /*Mat CameraMatrixExtrinsic = (Mat_<float>(4,4)<< RotationCombined, TranslationMatrix,
                 EmptyRow, 1);
-   	
+   	*/
+      Mat CameraMatrixExtrinsic;
+      hconcat(RotationCombined,TranslationMatrix,CameraMatrixExtrinsic);
+      vconcat(CameraMatrixExtrinsic,BottomRowExentric,CameraMatrixExtrinsic);
     fs << "CAMERA_MATRIX_INTRINSIC" << CameraMatrixIntrinsic;
     fs << "CAMERA_MATRIX_EXTRINSIC" << CameraMatrixExtrinsic;
    
