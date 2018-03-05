@@ -45,10 +45,17 @@
 #define CAMERA_FOV_H			60
 #define CAMERA_FOV_V			45
 
-#define CAMERA_HEIGHT			1.5
+#define CAMERA_HEIGHT			1.5         //Vertical offset of camera perpendicular to road. ->Rename CAMERA_OFFSET_Y?
+#define CAMERA_OFFSET_X           0         //Offset from middle of car perpendicular to driving direction and height.
 #define CAMERA_FOCAL_LENGTH		6.0e-3
 
+#define CAMERA_ANGLE_X          0           //Rotation around X Axis
+#define CAMERA_ANGLE_Y          0
+#define CAMERA_ANGLE_Z          0
 
+// Y is perpendicular to the road           (up)
+// Z is perpendicular to Y and on the road  (in the driving direction)
+// X is perpendicular to Y and Z            (towards the side of the road)
 
 
 
